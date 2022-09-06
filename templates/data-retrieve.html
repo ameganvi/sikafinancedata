@@ -1,0 +1,135 @@
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+    $(function() {
+      $('#xperiod').on('change', function() {
+        let selectedValue = parseInt($(this).val());
+       if(selectedValue >7){
+        $("#dateDeb").hide()
+        $("#dateEnd").hide()
+        $('#labeldateEnd').hide()
+        $('#labeldateDeb').hide()
+       }else{
+        $("#dateDeb").show()
+        $("#dateEnd").show()
+        $('#labeldateEnd').show()
+        $('#labeldateDeb').show()
+       }
+      });
+    });
+</script>
+
+{% block title %}Heyyy Fredy, it's working{% endblock %}
+</br></br>
+
+{% block content %}
+<form  method="POST">
+    <div>
+     <label for="Ticker">Choose a ticker:</label>
+     <select name="ticker" id="Ticker"  class="target">
+        <option value="SIVC.ci">AIR LIQUIDE CI</option>
+        <option value="BOAB.bj">BANK OF AFRICA BENIN</option>
+        <option value="BOABF.bf">BANK OF AFRICA BURKINA FASO</option>
+        <option value="BOAC.ci">BANK OF AFRICA CI</option>
+        <option value="BOAM.ml">BANK OF AFRICA MALI</option>
+        <option value="BOAN.ne">BANK OF AFRICA NIGER</option>
+        <option value="BOAS.sn">BANK OF AFRICA SENEGAL</option>
+        <option value="BNBC.ci">BERNABE</option>
+        <option value="BICC.ci">BICICI</option>
+        <option value="SDSC.ci">BOLLORE AFRICA LOGISTICS CI</option>
+        <option value="BRVMAG">BRVM - AGRICULTURE</option>
+        <option value="BRVMAS">BRVM - AUTRES SECTEURS</option>
+        <option value="BRVMDI">BRVM - DISTRIBUTION</option>
+        <option value="BRVMFI">BRVM - FINANCE</option>
+        <option value="BRVMIN">BRVM - INDUSTRIE</option>
+        <option value="BRVMSP">BRVM - SERVICES PUBLICS</option>
+        <option value="BRVMTR">BRVM - TRANSPORT</option>
+        <option value="BRVM10">BRVM 10</option>
+        <option value="BRVMC">BRVM COMPOSITE</option>
+        <option value="CAPIBRVM">Capitalisation BRVM</option>
+        <option value="CFAC.ci">CFAO CI</option>
+        <option value="CIEC.ci">CIE CI</option>
+        <option value="CBIBF.bf">CORIS BANK INTERNATIONAL BF</option>
+        <option value="SEMC.ci">CROWN SIEM</option>
+        <option value="ECOC.ci">ECOBANK CI</option>
+        <option value="ETIT.tg">ETI TG</option>
+        <option value="FTSC.ci">FILTISAC CI</option>
+        <option value="SVOC.ci">MOVIS CI</option>
+        <option value="NEIC.ci">NEI CEDA CI</option>
+        <option value="NTLC.ci">NESTLE CI</option>
+        <option value="NSBC.ci">NSIA BANQUE</option>
+        <option value="ONTBF.bf">ONATEL BF</option>
+        <option value="ORGT.tg">ORAGROUP TOGO</option>
+        <option value="PALC.ci">PALMCI</option>
+        <option value="SAFC.ci">SAFCA CI</option>
+        <option value="SPHC.ci">SAPH CI</option>
+        <option value="ABJC.ci">SERVAIR ABIDJAN CI</option>
+        <option value="STAC.ci">SETAO CI</option>
+        <option value="SGBC.ci">SGBCI</option>
+        <option value="CABC.ci">SICABLE CI</option>
+        <option value="SICC.ci">SICOR</option>
+        <option value="STBC.ci">SITAB</option>
+        <option value="SMBC.ci">SMB CI</option>
+        <option value="SIBC.ci">SOCIETE IVOIRIENNE DE BANQUE CI</option>
+        <option value="SDCC.ci">SODECI</option>
+        <option value="SOGC.ci">SOGB</option>
+        <option value="SLBC.ci">SOLIBRA CI</option>
+        <option value="SNTS.sn">SONATEL</option>
+        <option value="SCRC.ci">SUCRIVOIRE</option>
+        <option value="TTLC.ci">TOTAL CI</option>
+        <option value="TTLS.sn">TOTAL SENEGAL</option>
+        <option value="PRSC.ci">TRACTAFRIC MOTORS CI</option>
+        <option value="TTRC.ci">TRITURAF</option>
+        <option value="UNLC.ci">UNILEVER CI</option>
+        <option value="UNXC.ci">UNIWAX CI</option>
+        <option value="SHEC.ci">VIVO ENERGY CI</option>
+     </select>
+
+     <label for="dateDeb" id="labeldateDeb">Choose a datedeb:</label>
+     <input type="date" id="dateDeb" name="datedeb" class="target" value="2022-09-04">
+
+     <label for="dateEnd" id="labeldateEnd">Choose a dateEnd:</label>
+     <input type="date" name="dateend" id="dateEnd" class="target" value="2022-09-04" >
+
+     <label for="Period">Choose a period:</label>
+     <select name="xperiod" id="xperiod"  class="target">
+        <option value="0">Journalière</option>
+        <option value="7">Hebdomadaire</option>
+        <option value="30">Mensuelle</option>
+        <option value="91">Trimestrielle</option>
+        <option value="365">Annuelle</option>
+     </select>
+
+     <input type="submit" value="Refresh Data">
+ </div> 
+ </form>
+
+ <!-- <code>{% if data %} {{data}} {% endif %}</code>  -->
+ <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Open</th>
+        <th>High</th>
+        <th>Low</th>
+        <th>Close</th>
+        <th>Volume</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for currentData in data %}
+        <tr>
+          <td>{{ currentData.Date }}</td>
+          <td>{{ currentData.Open }}</td>
+          <td>{{ currentData.High }}</td>
+          <td>{{ currentData.Low }}</td>
+          <td>{{ currentData.Close }}</td>
+          <td>{{ currentData.Volume }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+ {% endblock %}
+
+ 

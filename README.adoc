@@ -1,0 +1,64 @@
+= Forms in Flask
+
+An HTML form a the primary user interface element that allows
+a web application user to send data back to the web server.
+
+== Get vs Post
+
+When submitting a form,
+a web browser makes an HTTP POST request to the server
+(see http://www.w3schools.com/tags/ref_httpmethods.asp[Get vs Post]).
+A POST request indicates that the server should handle data submitted by the user
+(e.g., by storing something in the application's database).
+This is in contrast to a GET request,
+which is the usual way to request data from the web server
+without causing anything to be stored in the application database.
+
+== Form Handling
+
+Handling an HTML form usually proceeds as follows:
+
+. The browser sends a GET request to retrieve the HTML page that contains the empty form
+. The user fills out the form and hits a `submit` button
+. The browser sends a POST request to the server; the POST request contains the data entered into the form by the user
+. The server recieves the POST request and validates the contents of the form
+  (e.g., checks for any missing or malformed fields)
+. If the form passes validation
+.. The server acts on the form data
+   (e.g., registers a new user, logs in a user, creates a new order, adds a product to a shopping cart, etc.)
+.. The server _redirects_ the browser to a confirmation page
+. If the form fails validation
+.. The server returns the partially completed form to ther user,
+   usually with an indication of the reason(s) that the form failed to validate
+.. The user updates the form and resubmits it for re-validation
+
+== Form Handling in Flask
+
+The following markup shows a simple form that
+requests a users first and last names.
+The form contains
+
+* A `method` attribute of `POST`, which informs the browser to use a POST
+  request when sending the form to the server
+* A `submit` element that the user clicks to cause the POST request to be sent
+* For each field in the form, an `input` element of the appropriate type
+  (in this case both are `text` elements)
+  that also have a `name` attribute.
+  The `name` attribute is what identifies the value of the form field
+  when the form is submitted to the server.
+
+
+== More Information
+
+* http://www.w3schools.com/html/html_forms.asp[Forms tutorial] from W3Schools
+* http://flask.pocoo.org/docs/0.10/quickstart/#the-request-object[Flask request object overview]
+* http://flask.pocoo.org/docs/0.10/api/#incoming-request-data[Flask request object reference]
+* http://flask.pocoo.org/docs/0.10/tutorial/views/[View functions] in Flask
+* http://flask.pocoo.org/docs/0.10/patterns/wtforms/[Form validation with WTForms]
+* https://flask-wtf.readthedocs.org/en/latest/[Flask-WTF extension] for WTForms
+* http://wtforms.readthedocs.org/en/latest/[WTForms home page]
+
+
+
+== Code base
+Original Code based from https://github.com/hayleyking/examples-forms
