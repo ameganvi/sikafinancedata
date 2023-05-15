@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_wtf import Form
-from wtforms import TextField
 from datetime import datetime
-import request
+import requests
 
 import pandas as pd
 
