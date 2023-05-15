@@ -62,6 +62,6 @@ def getData(ticker,xperiod,dateDeb,dateFin):
 
 
 # Run the application
-app.run(debug=True)
+app.run(debug=True , port=8001)
 
 

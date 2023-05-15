@@ -1,8 +1,32 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <script type=text/javascript>
+
+
+  
+  // Helper function to format the date as "YYYY-MM-DD"
+  function formatDate(date) {
+    var year = date.getFullYear();
+    var month = String(date.getMonth() + 1).padStart(2, '0');
+    var day = String(date.getDate()).padStart(2, '0');
+    return year + '-' + month + '-' + day;
+  }
+
     $(function() {
+       // Get today's date
+      var today = new Date();
+      // Set datedeb to today's date
+      var formattedDate = formatDate(today);
+      $('#dateDeb').val(formattedDate);
+      // Calculate dateend by adding 3 months to today's date
+      var endDate = new Date(today.getFullYear(), today.getMonth() + 3, today.getDate());
+      // Set dateDnd to calculated date
+      var formattedEndDate = formatDate(endDate);
+      $('#dateEnd').val(formattedEndDate);
+
+
       $('#xperiod').on('change', function() {
         let selectedValue = parseInt($(this).val());
        if(selectedValue >7){
@@ -87,10 +111,10 @@
      </select>
 
      <label for="dateDeb" id="labeldateDeb">Choose a datedeb:</label>
-     <input type="date" id="dateDeb" name="datedeb" class="target" value="2022-09-04">
+     <input type="date" id="dateDeb" name="datedeb" class="target"  >
 
      <label for="dateEnd" id="labeldateEnd">Choose a dateEnd:</label>
-     <input type="date" name="dateend" id="dateEnd" class="target" value="2022-09-04" >
+     <input type="date" name="dateend" id="dateEnd" class="target" >
 
      <label for="Period">Choose a period:</label>
      <select name="xperiod" id="xperiod"  class="target">
